@@ -12,7 +12,8 @@
     
     body {
         margin: 0;
-        font-family: Roboto, "Helvetica Neue", sans-serif;
+        font-family: 'Inter', Roboto, 'Segoe UI', system-ui, sans-serif;
+        font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
         cursor: default;
     }
 

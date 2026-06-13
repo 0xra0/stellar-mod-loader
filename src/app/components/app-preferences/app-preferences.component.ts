@@ -1,6 +1,6 @@
 import { cloneDeep } from "es-toolkit";
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Input, ViewChild } from "@angular/core";
-import { NgForm, FormsModule } from "@angular/forms";
+import { NgForm, NgModel, FormsModule } from "@angular/forms";
 import { MatCheckbox } from "@angular/material/checkbox";
 import { MatIcon } from "@angular/material/icon";
 import { MatTooltip } from "@angular/material/tooltip";
@@ -8,12 +8,15 @@ import { MatFormField, MatLabel, MatSuffix } from "@angular/material/form-field"
 import { MatSelect } from "@angular/material/select";
 import { MatOption } from "@angular/material/core";
 import { MatInput } from "@angular/material/input";
+import { MatIconButton } from "@angular/material/button";
 import { ComponentState, ComponentStateRef, DeclareState, ManagedSubject } from "@lithiumjs/angular";
-import { filter, switchMap } from "rxjs/operators";
+import { filter, switchMap, tap } from "rxjs/operators";
+import { filterDefined, runOnce } from "../../core/operators";
 import { BaseComponent } from "../../core/base-component";
 import { AppData } from "../../models/app-data";
 import { AppTheme } from "../../models/app-theme";
 import { AppStateBehaviorManager } from "../../services/app-state-behavior-manager";
+import { ElectronUtils } from "../../util/electron-utils";
 
 @Component({
     selector: "app-preferences",
@@ -31,7 +34,8 @@ import { AppStateBehaviorManager } from "../../services/app-state-behavior-manag
         MatSelect,
         MatOption,
         MatInput,
-        MatSuffix
+        MatSuffix,
+        MatIconButton
     ],
     providers: [
         ComponentState.create(AppPreferencesComponent),
@@ -70,5 +74,12 @@ export class AppPreferencesComponent extends BaseComponent {
 
     public get formModel(): AppData {
         return this._formModel;
+    }
+
+    public chooseProfilesDir(ngModel: NgModel): void {
+        runOnce(ElectronUtils.chooseDirectory(ngModel.value || undefined).pipe(
+            filterDefined(),
+            tap((directory) => ngModel.control.setValue(directory))
+        )).subscribe();
     }
 }

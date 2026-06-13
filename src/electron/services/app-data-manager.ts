@@ -34,12 +34,22 @@ export class AppDataManager {
         return this.app.profileDeploymentManager;
     }
 
+    public getProfilesDir(): string {
+        try {
+            const settings = this.loadSettings();
+            return PathUtils.expandPath(settings.profilesDir || AppConstants.APP_PROFILES_DIR);
+        } catch {
+            return AppConstants.APP_PROFILES_DIR;
+        }
+    }
+
     public loadProfileList(): AppProfile.Description[] {
-        if (!fs.existsSync(AppConstants.APP_PROFILES_DIR)) {
+        const profilesDir = this.getProfilesDir();
+        if (!fs.existsSync(profilesDir)) {
             return [];
         }
 
-        const profileNames = fs.readdirSync(AppConstants.APP_PROFILES_DIR).sort();
+        const profileNames = fs.readdirSync(profilesDir).sort();
         return profileNames.map((profileName: string) => {
             const profile = this.profileDataManager.loadProfile(profileName);
             return {

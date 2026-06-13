@@ -22,6 +22,21 @@
         </span>
 
         <mat-form-field appearance="fill">
+            <mat-label>Profiles Directory</mat-label>
+            <input #profilesDirModel="ngModel"
+                   matInput
+                   type="text"
+                   name="profilesDir"
+                   [(ngModel)]="formModel.profilesDir"
+                   placeholder="Default: profiles/ (relative to app directory)">
+            <button matSuffix mat-icon-button type="button" (click)="chooseProfilesDir(profilesDirModel)"
+                    matTooltip="Browse for profiles directory">
+                <mat-icon>folder_open</mat-icon>
+            </button>
+            <mat-icon matSuffix matTooltip="Directory where all profile folders are stored. Leave empty to use the default location.">help</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
             <mat-label>
                 Steam Installation Directory
             </mat-label>

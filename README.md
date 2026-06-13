@@ -20,7 +20,7 @@ Stellar is a mod manager for Windows and Linux that supports games including Fal
 
 Releases can be found here:
 
-&nbsp;&nbsp;&nbsp;&nbsp;[Stellar releases](https://github.com/lVlyke/stellar-mod-loader/releases)
+&nbsp;&nbsp;&nbsp;&nbsp;[Stellar releases](https://github.com/0xra0/stellar-mod-loader/releases)
 
 # Supported Games
 Stellar currently has built-in support the following games:
@@ -43,7 +43,7 @@ Many other games are supported with **[custom game support](#custom-games)**.
 > [!IMPORTANT]
 > [7-Zip](https://www.7-zip.org/) must be installed to use Stellar.
 
-To install Stellar, simply download the latest release from the [releases page](https://github.com/lVlyke/stellar-mod-loader/releases) and extract the archive to a folder of your choice.
+To install Stellar, simply download the latest release from the [releases page](https://github.com/0xra0/stellar-mod-loader/releases) and extract the archive to a folder of your choice.
 
 > [!NOTE]
 > If you are using Ubuntu or an Ubuntu-based Linux distribution, you will need to run the included `install-apparmor-profile.sh` script in order to create an AppArmor profile for Stellar. See [this Ubuntu blog post](https://ubuntu.com/blog/ubuntu-23-10-restricted-unprivileged-user-namespaces) for more information.
@@ -460,7 +460,7 @@ If you would like to share your existing custom game definition, open the **Game
 
 ### Submit a custom game definition for inclusion into Stellar <a name="submit-custom-game"></a>
 
-Once you have tested your game definition to make sure everything works as expected, feel free to open an [issue](https://github.com/lVlyke/stellar-mod-loader/issues) and submit your exported game definition file for inclusion directly into Stellar. If approved, your game definition will be added as a built-in game in a future release.
+Once you have tested your game definition to make sure everything works as expected, feel free to open an [issue](https://github.com/0xra0/stellar-mod-loader/issues) and submit your exported game definition file for inclusion directly into Stellar. If approved, your game definition will be added as a built-in game in a future release.
 
 ## App settings
 
@@ -571,7 +571,7 @@ sPhotoModeFolder=Photos
 
 ## Report an issue
 
-If you run into a problem, please check the [issues page](https://github.com/lVlyke/stellar-mod-loader/issues) to see if your question has been answered, or create a new issue if you have a new bug to report.
+If you run into a problem, please check the [issues page](https://github.com/0xra0/stellar-mod-loader/issues) to see if your question has been answered, or create a new issue if you have a new bug to report.
 
 If you have a suggestion for a new feature or a new game to support, feel free to open an issue for your request.
 
@@ -583,7 +583,7 @@ To build a release, run `npm run app:build-release` for the current platform or 
 
 ## Setting up dev environment with nix
 
-Developing with a conventional node installation is fine. Optionally you can let nix handle the dev environment for you. nix allows to keep the environment reproducible (and makes developing on NixOS possible). See (discussion in PR #23)[https://github.com/lVlyke/stellar-mod-loader/pull/23]. This is only tested on Linux. To use nix dev shells you need to install and setup:
+Developing with a conventional node installation is fine. Optionally you can let nix handle the dev environment for you. nix allows to keep the environment reproducible (and makes developing on NixOS possible). See (discussion in PR #23)[https://github.com/0xra0/stellar-mod-loader/pull/23]. This is only tested on Linux. To use nix dev shells you need to install and setup:
 - [The nix package manager](https://nixos.org/download/)
 - [direnv](https://direnv.net/), optimally with [a shell hook](https://direnv.net/docs/hook.html)
 - [nix-direnv](https://github.com/nix-community/nix-direnv)

@@ -433,7 +433,8 @@ export class AppStateBehaviorManager {
             steamCompatDataRoot: appData.steamCompatDataRoot,
             logPanelEnabled: appData.logPanelEnabled,
             customGameDb: appData.customGameDb,
-            lastSteamUserId: appData.lastSteamUserId
+            lastSteamUserId: appData.lastSteamUserId,
+            profilesDir: appData.profilesDir
         };
     }
 }

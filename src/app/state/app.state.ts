@@ -137,6 +137,10 @@ export class AppState {
             state.lastSteamUserId = settings.lastSteamUserId;
         }
 
+        if (settings.profilesDir !== undefined) {
+            state.profilesDir = settings.profilesDir;
+        }
+
         context.setState(state);
     }
 

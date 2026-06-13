@@ -24,6 +24,8 @@
         #profile-actions {
             mat-panel-title {
                 font-size: 1.25rem;
+                font-family: 'Space Grotesk', 'Inter', sans-serif;
+                font-weight: 600;
                 color: mixins.theme-foreground-color(text, $is-dark);
             }
         }
@@ -34,6 +36,49 @@
 
         mat-card-title.sticky-title {
             background-color: mixins.theme-background-color(card, $is-dark);
+        }
+
+        @if ($is-dark) {
+
+            .select-header-buttons {
+                background: #1c2128;
+                border-color: #30363d;
+            }
+
+            #profile-game-title {
+                background: #1c2128;
+            }
+
+            #log-pane {
+                background-color: #0d1117;
+                border-color: #30363d;
+                font-size: 0.8rem;
+                font-family: 'Inter', 'Consolas', monospace;
+            }
+
+            mat-card-title.sticky-title {
+                background-color: #161b22;
+                font-family: 'Space Grotesk', 'Inter', sans-serif;
+                font-weight: 600;
+                letter-spacing: -0.01em;
+                color: #8b5cf6;
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+            }
+
+            #onboard-stub {
+                h1 {
+                    font-family: 'Space Grotesk', 'Inter', sans-serif;
+                    font-weight: 700;
+                    font-size: 2.5rem;
+                    letter-spacing: -0.03em;
+                    background: linear-gradient(135deg, #8b5cf6, #58a6ff);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                }
+            }
         }
     }
 }

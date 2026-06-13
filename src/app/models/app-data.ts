@@ -16,6 +16,7 @@ export interface AppData {
     logPanelEnabled?: boolean;
     customGameDb?: GameDatabase;
     lastSteamUserId?: string;
+    profilesDir?: string;
 
     /** @deprecated */
     normalizePathCasing?: boolean;

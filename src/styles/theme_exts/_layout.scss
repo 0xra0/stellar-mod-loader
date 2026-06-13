@@ -5,4 +5,100 @@
     [app-hidden]:not([app-hidden="false"]), .hidden {
         display: none !important;
     }
+
+    @if ($is-dark) {
+
+        // Deep space backgrounds
+        .mat-app-background {
+            background-color: #0d1117;
+        }
+
+        // Card / panel surfaces
+        .mat-mdc-card, mat-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        mat-expansion-panel {
+            background-color: #161b22 !important;
+            border: 1px solid #30363d;
+        }
+
+        // Dialogs
+        .mat-mdc-dialog-surface, .mdc-dialog__surface {
+            background-color: #161b22 !important;
+            border: 1px solid #30363d;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
+        }
+
+        // Menus / dropdowns
+        .mat-mdc-menu-panel, .mdc-menu-surface {
+            background-color: #1c2128 !important;
+            border: 1px solid #30363d;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        // Select panels
+        .mat-mdc-select-panel {
+            background-color: #1c2128 !important;
+            border: 1px solid #30363d;
+        }
+
+        // Form field fill
+        .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+            background-color: #1c2128;
+        }
+
+        // Tooltip
+        .mdc-tooltip__surface {
+            background-color: #30363d !important;
+            color: #e6edf3 !important;
+            border-radius: 6px !important;
+            font-family: 'Inter', Roboto, sans-serif;
+            font-size: 0.75rem;
+        }
+
+        // Precise accent / primary color overrides for icon buttons
+        [matColor="primary"], [matPrimary] {
+            color: #8b5cf6 !important;
+        }
+
+        [matColor="accent"], [matAccent] {
+            color: #58a6ff !important;
+        }
+
+        // Icon button hover glow
+        button.mat-mdc-icon-button:hover {
+            background: rgba(88, 166, 255, 0.1) !important;
+        }
+
+        // Table header
+        th.mat-mdc-header-cell {
+            color: #8b949e;
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.7rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border-bottom-color: #30363d !important;
+        }
+
+        // Table cells
+        td.mat-mdc-cell {
+            border-bottom-color: #21262d !important;
+        }
+
+        // Typography: headers
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        // Stepper
+        mat-step-header {
+            background: transparent !important;
+        }
+    }
 }

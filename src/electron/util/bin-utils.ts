@@ -43,4 +43,39 @@ export namespace BinUtils {
 
         return _7zBinaryPath;
     }
+
+    export function resolveUnrarBinaryPath(): string | undefined {
+        const unrarLocations = [
+            "C:\\Program Files\\WinRAR\\UnRAR.exe",
+            "C:\\Program Files (x86)\\WinRAR\\UnRAR.exe"
+        ];
+
+        let unrarBinaryPath: string | undefined = unrarLocations.find(p => fs.existsSync(p));
+
+        if (!unrarBinaryPath) {
+            try {
+                const result = which.sync("unrar");
+                unrarBinaryPath = (Array.isArray(result) ? result[0] : result) ?? undefined;
+            } catch {}
+        }
+
+        if (unrarBinaryPath) {
+            log.debug("Found unrar binary: ", unrarBinaryPath);
+        }
+
+        return unrarBinaryPath;
+    }
+
+    export function resolveBsdtarBinaryPath(): string | undefined {
+        try {
+            const result = which.sync("bsdtar");
+            const bsdtarPath = (Array.isArray(result) ? result[0] : result) ?? undefined;
+            if (bsdtarPath) {
+                log.debug("Found bsdtar binary: ", bsdtarPath);
+            }
+            return bsdtarPath;
+        } catch {
+            return undefined;
+        }
+    }
 }

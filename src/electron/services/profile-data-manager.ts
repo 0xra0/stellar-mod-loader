@@ -30,9 +30,11 @@ export class ProfileDataManager {
     }
 
     public getDefaultProfileDir(profileNameOrPath: string): string {
-        return path.isAbsolute(profileNameOrPath)
-            ? profileNameOrPath
-            : PathUtils.expandPath(path.join(AppConstants.APP_PROFILES_DIR, profileNameOrPath));
+        if (path.isAbsolute(profileNameOrPath)) {
+            return profileNameOrPath;
+        }
+        const profilesBaseDir = this.appDataManager.getProfilesDir();
+        return PathUtils.expandPath(path.join(profilesBaseDir, profileNameOrPath));
     }
 
     public getProfileDir(profile: AppProfile | AppBaseProfile): string {

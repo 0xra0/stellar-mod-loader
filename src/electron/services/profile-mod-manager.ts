@@ -12,6 +12,7 @@ import * as Seven from "node-7z";
 
 const path = require("path") as typeof import("path");
 const fs = require("fs-extra") as typeof import("fs-extra");
+const { execFile } = require("child_process") as typeof import("child_process");
 const { dialog } = require("electron") as typeof Electron;
 const detectFileEncodingAndLanguage = /** @type {typeof import("detect-file-encoding-and-language").default} */ (
     require("detect-file-encoding-and-language/src/index-node.js")
@@ -83,8 +84,7 @@ export class ProfileModManager {
             switch (fileType.toLowerCase()) {
                 case ".7z":
                 case ".7zip":
-                case ".zip":
-                case ".rar": {
+                case ".zip": {
                     decompressOperation = new Promise((resolve, _reject) => {
                         const _7zBinaryPath = BinUtils.resolve7zBinaryPath();
                         const decompressStream = Seven.extractFull(filePath, modDirStagingPath, { $bin: _7zBinaryPath });
@@ -93,6 +93,60 @@ export class ProfileModManager {
                             log.error(e);
                             resolve(false);
                         });
+                    });
+                } break;
+                case ".rar": {
+                    decompressOperation = new Promise((resolve) => {
+                        let _7zBinaryPath: string | undefined;
+                        try {
+                            _7zBinaryPath = BinUtils.resolve7zBinaryPath();
+                        } catch (e) {
+                            log.warn("7-Zip not found, will attempt unrar for RAR extraction:", e);
+                        }
+
+                        const tryBsdtar = () => {
+                            const bsdtarPath = BinUtils.resolveBsdtarBinaryPath();
+                            if (bsdtarPath) {
+                                execFile(bsdtarPath, ["xf", filePath, "-C", modDirStagingPath], (err) => {
+                                    if (err) {
+                                        log.error("bsdtar RAR extraction failed:", err);
+                                        resolve(false);
+                                    } else {
+                                        resolve(true);
+                                    }
+                                });
+                            } else {
+                                log.error("RAR extraction failed: no RAR-capable extractor found (tried 7-Zip, unrar, bsdtar).");
+                                resolve(false);
+                            }
+                        };
+
+                        const tryUnrar = () => {
+                            const unrarPath = BinUtils.resolveUnrarBinaryPath();
+                            if (unrarPath) {
+                                execFile(unrarPath, ["x", "-y", "--", filePath, modDirStagingPath + path.sep], (err) => {
+                                    if (err) {
+                                        log.warn("unrar extraction failed, trying bsdtar:", err);
+                                        tryBsdtar();
+                                    } else {
+                                        resolve(true);
+                                    }
+                                });
+                            } else {
+                                tryBsdtar();
+                            }
+                        };
+
+                        if (_7zBinaryPath) {
+                            const decompressStream = Seven.extractFull(filePath, modDirStagingPath, { $bin: _7zBinaryPath });
+                            decompressStream.on("end", () => resolve(true));
+                            decompressStream.on("error", (e) => {
+                                log.warn("7-Zip RAR extraction failed, trying unrar:", e);
+                                tryUnrar();
+                            });
+                        } else {
+                            tryUnrar();
+                        }
                     });
                 } break;
                 default: {

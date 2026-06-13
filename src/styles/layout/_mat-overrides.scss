@@ -122,4 +122,40 @@
             right: -0.5rem;
         }
     }
+
+    // Modern rounded shapes
+    mat-card, .mat-mdc-card {
+        border-radius: 12px !important;
+    }
+
+    mat-expansion-panel {
+        border-radius: 12px !important;
+    }
+
+    .mat-mdc-raised-button,
+    .mat-mdc-outlined-button,
+    .mat-mdc-unelevated-button {
+        border-radius: 8px !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.01em !important;
+        font-family: 'Inter', Roboto, system-ui, sans-serif !important;
+    }
+
+    .mat-mdc-dialog-surface {
+        border-radius: 16px !important;
+    }
+
+    .mat-mdc-menu-panel {
+        border-radius: 12px !important;
+    }
+
+    .mat-mdc-select-panel {
+        border-radius: 8px !important;
+    }
+
+    mat-card-title, .mat-mdc-card-title {
+        font-family: 'Space Grotesk', 'Inter', sans-serif;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+    }
 }
