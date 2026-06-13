@@ -1,5 +1,10 @@
 # Stellar Mod Loader
 
+> **This is a fork of [lVlyke/stellar-mod-loader](https://github.com/lVlyke/stellar-mod-loader).**
+> Additional changes in this fork:
+> - Global **Profiles Directory** setting in App Preferences (no more per-profile root path overrides)
+> - Bundled ALSA version wrapper to eliminate startup warnings on Arch Linux and other non-Ubuntu distributions
+
 Stellar is a mod manager for Windows and Linux that supports games including Fallout, Oblivion, Skyrim, and Starfield. Formerly known as Starfield Mod Loader.
 
 # Features
