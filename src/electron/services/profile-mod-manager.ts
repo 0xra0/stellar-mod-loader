@@ -107,6 +107,7 @@ export class ProfileModManager {
                         const tryBsdtar = () => {
                             const bsdtarPath = BinUtils.resolveBsdtarBinaryPath();
                             if (bsdtarPath) {
+                                fs.mkdirSync(modDirStagingPath, { recursive: true });
                                 execFile(bsdtarPath, ["xf", filePath, "-C", modDirStagingPath], (err) => {
                                     if (err) {
                                         log.error("bsdtar RAR extraction failed:", err);
@@ -124,6 +125,7 @@ export class ProfileModManager {
                         const tryUnrar = () => {
                             const unrarPath = BinUtils.resolveUnrarBinaryPath();
                             if (unrarPath) {
+                                fs.mkdirSync(modDirStagingPath, { recursive: true });
                                 execFile(unrarPath, ["x", "-y", "--", filePath, modDirStagingPath + path.sep], (err) => {
                                     if (err) {
                                         log.warn("unrar extraction failed, trying bsdtar:", err);
