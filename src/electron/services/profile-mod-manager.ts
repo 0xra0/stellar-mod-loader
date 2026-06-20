@@ -140,11 +140,20 @@ export class ProfileModManager {
                         };
 
                         if (_7zBinaryPath) {
+                            // node-7z always emits "end" after "error", so only treat "end" as
+                            // success when 7-Zip didn't error. Otherwise resolving here would race
+                            // ahead of the unrar/bsdtar fallback and import from an empty staging dir.
+                            let sevenZipFailed = false;
                             const decompressStream = Seven.extractFull(filePath, modDirStagingPath, { $bin: _7zBinaryPath });
-                            decompressStream.on("end", () => resolve(true));
                             decompressStream.on("error", (e) => {
+                                sevenZipFailed = true;
                                 log.warn("7-Zip RAR extraction failed, trying unrar:", e);
                                 tryUnrar();
+                            });
+                            decompressStream.on("end", () => {
+                                if (!sevenZipFailed) {
+                                    resolve(true);
+                                }
                             });
                         } else {
                             tryUnrar();
